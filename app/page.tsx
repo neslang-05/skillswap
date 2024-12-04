@@ -5,11 +5,34 @@ import { Header } from '@/components/header'
 import { Button } from "@/components/ui/button"
 import { ArrowRight, BookOpen, Users, Zap, Star, Shield, Sparkles } from 'lucide-react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import Typewriter from 'typewriter-effect'
 
-// Animation variants for cards
-const cardVariants = {
+// Animation variants
+const fadeInUp: Variants = {
+  initial: {
+    opacity: 0,
+    y: 60
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  }
+}
+
+const staggerContainer: Variants = {
+  animate: {
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+}
+
+const cardVariants: Variants = {
   offscreen: {
     y: 50,
     opacity: 0
@@ -33,6 +56,24 @@ const cardVariants = {
   }
 }
 
+const skillTagVariants: Variants = {
+  initial: { opacity: 0, scale: 0.9 },
+  animate: (i: number) => ({
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.3
+    }
+  }),
+  hover: {
+    scale: 1.1,
+    transition: {
+      duration: 0.2
+    }
+  }
+}
+
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false)
 
@@ -43,11 +84,19 @@ export default function LandingPage() {
   if (!mounted) return null
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <motion.div 
+      className="min-h-screen flex flex-col"
+      initial="initial"
+      animate="animate"
+      variants={staggerContainer}
+    >
       <Header />
       <main className="flex-grow">
         {/* Hero Section - Now full screen */}
-        <section className="h-[calc(100vh-4rem)] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-600 via-orange-500 to-green-500 dark:from-purple-900 dark:via-orange-900 dark:to-green-900 text-white dark:text-white flex items-center justify-center">
+        <motion.section 
+          className="h-[calc(100vh-4rem)] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-600 via-orange-500 to-green-500 dark:from-purple-900 dark:via-orange-900 dark:to-green-900 text-white dark:text-white flex items-center justify-center"
+          variants={fadeInUp}
+        >
           <div className="container mx-auto px-4 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -80,13 +129,24 @@ export default function LandingPage() {
               </motion.div>
             </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Features Section */}
-        <section className="py-20 bg-background text-foreground">
+        <motion.section 
+          className="py-20 bg-background text-foreground"
+          variants={fadeInUp}
+        >
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12">How SkillSwap Works</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.h2 
+              className="text-3xl font-bold text-center mb-12"
+              variants={fadeInUp}
+            >
+              How SkillSwap Works
+            </motion.h2>
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+              variants={staggerContainer}
+            >
               {[
                 {
                   icon: <BookOpen className="h-12 w-12 text-primary" />,
@@ -115,15 +175,26 @@ export default function LandingPage() {
                   <FeatureCard {...feature} />
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Testimonials Section */}
-        <section className="bg-muted py-20">
+        <motion.section 
+          className="bg-muted py-20"
+          variants={fadeInUp}
+        >
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12">What Our Users Say</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.h2 
+              className="text-3xl font-bold text-center mb-12"
+              variants={fadeInUp}
+            >
+              What Our Users Say
+            </motion.h2>
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              variants={staggerContainer}
+            >
               {[
                 {
                   quote: "SkillSwap has been a game-changer for my college experience. I've learned so much from my peers!",
@@ -149,15 +220,26 @@ export default function LandingPage() {
                   <TestimonialCard {...testimonial} />
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Popular Skills Section */}
-        <section className="bg-background text-foreground py-20">
+        <motion.section 
+          className="bg-background text-foreground py-20"
+          variants={fadeInUp}
+        >
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12">Popular Skills on SkillSwap</h2>
-            <div className="flex flex-wrap justify-center gap-4">
+            <motion.h2 
+              className="text-3xl font-bold text-center mb-12"
+              variants={fadeInUp}
+            >
+              Popular Skills on SkillSwap
+            </motion.h2>
+            <motion.div 
+              className="flex flex-wrap justify-center gap-4"
+              variants={staggerContainer}
+            >
               {[
                 "Programming",
                 "Graphic Design",
@@ -172,23 +254,34 @@ export default function LandingPage() {
               ].map((skill, index) => (
                 <motion.span
                   key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-medium hover:scale-105 transition-transform cursor-default"
+                  custom={index}
+                  variants={skillTagVariants}
+                  whileHover="hover"
+                  className="bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-medium cursor-default"
                 >
                   {skill}
                 </motion.span>
               ))}
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Trust and Safety Section */}
-        <section className="py-20 bg-muted text-foreground">
+        <motion.section 
+          className="py-20 bg-muted text-foreground"
+          variants={fadeInUp}
+        >
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12">Your Trust and Safety is Our Priority</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.h2 
+              className="text-3xl font-bold text-center mb-12"
+              variants={fadeInUp}
+            >
+              Your Trust and Safety is Our Priority
+            </motion.h2>
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+              variants={staggerContainer}
+            >
               {[
                 {
                   icon: <Shield className="h-12 w-12 text-primary" />,
@@ -217,21 +310,29 @@ export default function LandingPage() {
                   <TrustCard {...card} />
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* CTA Section */}
-        <section className="bg-primary text-primary-foreground py-20">
+        <motion.section 
+          className="bg-primary text-primary-foreground py-20"
+          variants={fadeInUp}
+        >
           <div className="container mx-auto px-4 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-3xl font-bold mb-6">Ready to Start Swapping Skills?</h2>
-              <p className="text-xl mb-8">Join our community of learners and start expanding your skillset today.</p>
+            <motion.div variants={fadeInUp}>
+              <motion.h2 
+                className="text-3xl font-bold mb-6"
+                variants={fadeInUp}
+              >
+                Ready to Start Swapping Skills?
+              </motion.h2>
+              <motion.p 
+                className="text-xl mb-8"
+                variants={fadeInUp}
+              >
+                Join our community of learners and start expanding your skillset today.
+              </motion.p>
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -245,11 +346,14 @@ export default function LandingPage() {
               </motion.div>
             </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Rest of the sections remain the same but wrapped with motion.div for animations */}
       </main>
-      <footer className="bg-background border-t py-6">
+      <motion.footer 
+        className="bg-background border-t py-6"
+        variants={fadeInUp}
+      >
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-muted-foreground">
@@ -273,8 +377,8 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
-      </footer>
-    </div>
+      </motion.footer>
+    </motion.div>
   )
 }
 
