@@ -1,5 +1,5 @@
 'use client'
-
+// import '../app/globals.css'
 import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { Header } from '@/components/header'
@@ -10,12 +10,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { mockUser } from '@/lib/mock-data'
-import { toast } from "@/components/ui/use-toast"
+import { useToast } from "@/hooks/use-toast"
+import { Toast } from "@/components/ui/toast"
 
 export default function EditProfile() {
   const router = useRouter()
   const [user, setUser] = useState(mockUser)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const { toast } = useToast()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
-import { Toast } from "@/components/ui/toast"
+import { useToast } from "@/hooks/use-toast"
 import Link from 'next/link'
 
 export default function SignUp() {
@@ -16,11 +16,12 @@ export default function SignUp() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const router = useRouter()
+  const { toast } = useToast()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (password !== confirmPassword) {
-      Toast({
+      toast({
         title: "Passwords do not match",
         description: "Please ensure your passwords match.",
         variant: "destructive",
@@ -31,7 +32,7 @@ export default function SignUp() {
     console.log('Sign up attempt with:', { name, email, password })
     // Simulating a successful sign-up
     localStorage.setItem('isAuthenticated', 'true')
-    Toast({
+    toast({
       title: "Sign up successful",
       description: "Welcome to SkillSwap! Let's set up your profile.",
     })

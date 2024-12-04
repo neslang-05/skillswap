@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useToast } from "@/hooks/use-toast";
 import { Header } from '@/components/header'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -9,6 +10,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Calendar, MessageSquare, Users, Book, User } from 'lucide-react'
 import Link from 'next/link'
+import { mockUser } from '@/lib/mock-data'
 
 // Mock data for the dashboard
 const upcomingExchanges = [
@@ -24,6 +26,9 @@ const recentMessages = [
 const recommendedSkills = [
   "Machine Learning", "UX Design", "Digital Marketing", "Data Visualization", "Mobile App Development"
 ]
+
+// If you don't have mockUser data yet, we can use a temporary ID
+const TEMP_USER_ID = '1' // Temporary solution until we have real user data
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("upcoming")
@@ -99,10 +104,10 @@ export default function Dashboard() {
                   <Badge key={index} variant="secondary">{skill}</Badge>
                 ))}
               </div>
-              <Button className="w-full mt-4">
-                <Book className="mr-2 h-4 w-4" />
-               <Link href="/explore">
-                 Explore More Skills
+              <Button className="w-full mt-4" asChild>
+                <Link href="/explore">
+                  <Book className="mr-2 h-4 w-4" />
+                  Explore More Skills
                 </Link>
               </Button>
             </CardContent>
@@ -114,7 +119,7 @@ export default function Dashboard() {
             <CardContent>
               <p className="mb-4">Keep your profile up to date to get the best matches for skill exchanges.</p>
               <Button asChild>
-                <Link href="/profile/[id]">
+                <Link href={`/profile/${TEMP_USER_ID}`}>
                   <User className="mr-2 h-4 w-4" />
                   View Profile
                 </Link>
@@ -122,6 +127,7 @@ export default function Dashboard() {
             </CardContent>
           </Card>
         </div>
+        
       </main>
       <footer className="bg-background border-t py-6">
         <div className="container mx-auto px-4 text-center text-muted-foreground">
