@@ -35,10 +35,10 @@ export function Header() {
         </Link>
         <nav className="hidden md:flex items-center space-x-4">
           <Link href="/search" className="text-muted-foreground hover:text-primary">
-            Search Skills
+            <b>Search Skills</b>
           </Link>
           <Link href="/explore" className="text-muted-foreground hover:text-primary">
-            Explore
+            <b>Explore</b>
           </Link>
           {!isAuthenticated ? (
             <>
