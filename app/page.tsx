@@ -367,7 +367,7 @@ export default function LandingPage() {
                 Privacy Policy
               </Link>
               <a 
-                href="https://github.com/your-username/skillswap" 
+                href="https://github.com/neslang-05/skillswap-v2" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-sm text-muted-foreground hover:text-primary"
