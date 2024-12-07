@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useAuth } from '@/contexts/auth-context'
 import { Header } from '@/components/header'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -18,6 +19,7 @@ export default function SignUp() {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const { toast } = useToast()
+  const { setIsAuthenticated, setUserId } = useAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -54,12 +56,15 @@ export default function SignUp() {
         throw new Error(data.error || 'Something went wrong')
       }
 
+      setIsAuthenticated(true)
+      setUserId(data.userId)
+
       toast({
         title: "Account created successfully",
         description: "Let's set up your profile!",
       })
 
-      window.location.href = `/profile/edit`
+      router.push('/profile/edit')
 
     } catch (error) {
       console.error('Signup error:', error)

@@ -1,11 +1,10 @@
 import { NextResponse } from 'next/server';
 import { NextRequest } from 'next/server';
-import { verify } from 'jsonwebtoken';
-import { JWTPayload } from './types/auth';
+import * as jose from 'jose';
 
-const protectedRoutes = ['/dashboard', '/profile'];
+const protectedRoutes = ['/dashboard', '/profile', '/explore'];
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const token = request.cookies.get('token');
 
   if (protectedRoutes.some(route => request.nextUrl.pathname.startsWith(route))) {
@@ -14,9 +13,12 @@ export function middleware(request: NextRequest) {
     }
 
     try {
-      verify(token.value, process.env.JWT_SECRET!) as JWTPayload;
+      const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+      await jose.jwtVerify(token.value, secret);
       return NextResponse.next();
     } catch (error) {
+      console.error('Token verification failed:', error);
+      request.cookies.delete('token');
       return NextResponse.redirect(new URL('/signin', request.url));
     }
   }
@@ -25,5 +27,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/profile/:path*'],
-}; 
+  matcher: ['/dashboard/:path*', '/profile/:path*', '/explore/:path*'],
+};
