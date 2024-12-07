@@ -13,20 +13,52 @@ import Link from 'next/link'
 export default function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const { toast } = useToast()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically handle the sign-in logic
-    console.log('Sign in attempt with:', { email, password })
-    // Simulating a successful sign-in
-    localStorage.setItem('isAuthenticated', 'true')
-    toast({
-      title: "Sign in successful",
-      description: "Welcome back to SkillSwap!",
-    })
-    router.push('/dashboard')
+    setIsLoading(true)
+
+    try {
+      console.log('Sending signin request...')
+      const res = await fetch('/api/auth/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      })
+
+      const data = await res.json()
+      console.log('Signin response:', data)
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Something went wrong')
+      }
+
+      toast({
+        title: "Signed in successfully",
+        description: "Welcome back!",
+      })
+
+      // Use window.location for navigation
+      window.location.href = '/dashboard'
+
+    } catch (error) {
+      console.error('Signin error:', error)
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : 'Something went wrong',
+        variant: "destructive",
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -50,6 +82,7 @@ export default function SignIn() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    disabled={isLoading}
                   />
                 </div>
                 <div className="flex flex-col space-y-1.5">
@@ -60,10 +93,17 @@ export default function SignIn() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    disabled={isLoading}
                   />
                 </div>
               </div>
-              <Button className="w-full mt-6" type="submit">Sign In</Button>
+              <Button 
+                className="w-full mt-6" 
+                type="submit"
+                disabled={isLoading}
+              >
+                {isLoading ? "Signing in..." : "Sign In"}
+              </Button>
             </form>
           </CardContent>
           <CardFooter className="flex justify-between">

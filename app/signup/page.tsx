@@ -15,28 +15,62 @@ export default function SignUp() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const { toast } = useToast()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setIsLoading(true)
+
     if (password !== confirmPassword) {
       toast({
         title: "Passwords do not match",
         description: "Please ensure your passwords match.",
         variant: "destructive",
       })
+      setIsLoading(false)
       return
     }
-    // Here you would typically handle the sign-up logic
-    console.log('Sign up attempt with:', { name, email, password })
-    // Simulating a successful sign-up
-    localStorage.setItem('isAuthenticated', 'true')
-    toast({
-      title: "Sign up successful",
-      description: "Welcome to SkillSwap! Let's set up your profile.",
-    })
-    router.push('/profile/setup')
+
+    try {
+      console.log('Sending signup request...')
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
+      })
+
+      const data = await res.json()
+      console.log('Signup response:', data)
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Something went wrong')
+      }
+
+      toast({
+        title: "Account created successfully",
+        description: "Let's set up your profile!",
+      })
+
+      window.location.href = `/profile/edit`
+
+    } catch (error) {
+      console.error('Signup error:', error)
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : 'Something went wrong',
+        variant: "destructive",
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -93,7 +127,9 @@ export default function SignUp() {
                   />
                 </div>
               </div>
-              <Button className="w-full mt-6" type="submit">Sign Up</Button>
+              <Button className="w-full mt-6" type="submit" disabled={isLoading}>
+                {isLoading ? 'Signing up...' : 'Sign Up'}
+              </Button>
             </form>
           </CardContent>
           <CardFooter>
