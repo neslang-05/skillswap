@@ -94,7 +94,7 @@ export default function LandingPage() {
       <main className="flex-grow">
         {/* Hero Section - Now full screen */}
         <motion.section 
-          className="h-[calc(100vh-4rem)] bg-gray-800 text-white dark:text-white flex items-center justify-center"
+          className="h-[calc(100vh-4rem)] hero-gradient text-white dark:text-white flex items-center justify-center"
           variants={fadeInUp}
         >
           <div className="container mx-auto px-4 text-center">
