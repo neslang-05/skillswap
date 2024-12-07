@@ -1,136 +1,104 @@
-# SkillSwap
 
-![SkillSwap Demo](path/to/demo.gif)
+# SkillSwap
 
 SkillSwap is a platform that enables students to exchange skills and knowledge with each other. Built with Next.js 14, TypeScript, and Tailwind CSS, it provides a modern and intuitive interface for peer-to-peer learning.
 
-## Key Features
-- Skill Exchange
-- Dynamic Dashboard
-- Skill Explorer
-- User Profiles
-- Real-time Messaging
-- Dark Mode Support
-- Responsive Design
+## Features
+
+- 🔄 Skill Exchange System
+- 👥 User Authentication
+- 🎨 Modern UI with Dark/Light Mode
+- 🔍 Advanced Skill Search
+- 📱 Responsive Design
+- ⚡ Real-time Interactions
+- 🛡️ Secure User Verification
+- ⭐ Rating System
 
 ## Tech Stack
-- Framework: Next.js 14 (App Router)
-- Language: TypeScript
-- Styling: Tailwind CSS
-- UI Components: shadcn/ui
-- Animations: Framer Motion
-- Icons: Lucide Icons
-- State Management: React Hooks
-- Form Handling: React Hook Form
-- Authentication: NextAuth.js
 
+- **Framework:** Next.js 14
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Components:** shadcn/ui
+- **Animations:** Framer Motion
+- **State Management:** React Hooks
+- **Authentication:** [Your Auth Provider]
+- **Database:** [Your Database]
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js: v18.x (recommended: v18.17 or later)
-- npm (v9.x+) or Yarn (v1.22+)
+
+- Node.js 18+ 
+- npm or yarn
 
 ### Installation
+
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/skillswap.git
-   cd skillswap
-   ```
+```bash
+git clone https://github.com/yourusername/skillswap.git
+```
+
 2. Install dependencies:
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-3. Set up environment variables:
-   Create a `.env.local` file and add:
-   ```
-   DATABASE_URL=your_database_connection_string
-   NEXTAUTH_SECRET=your_nextauth_secret
-   ```
+```bash
+cd skillswap
+npm install
+```
+
+3. Create a `.env.local` file in the root directory and add your environment variables:
+```env
+NEXT_PUBLIC_API_URL=your_api_url
+DATABASE_URL=your_database_url
+```
+
 4. Run the development server:
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
-5. Open http://localhost:3000 in your browser.
+```bash
+npm run dev
+```
 
-
-## Project Roadmap
-
-### Current Phase
-- Basic skill exchange platform.
-- User profile management.
-- Skill browsing and filtering.
-
-### Upcoming Features
-#### Near-Term Development
-- [x] Robust Authentication System (Social login, Email verification)
-- [ ] Real-time Messaging System (WebSocket-based chat, Message notifications)
-- [ ] Advanced Skill Matching (AI-powered skill recommendation, Compatibility scoring)
-
-
-#### Long-Term Vision
-- [ ] Mobile Application
-- [ ] Machine Learning Skill Suggestions
-- [ ] Community Reputation System
-- [ ] International Skill Exchange Programs
-
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure
+
 ```
 skillswap/
-├── app/
-│   ├── dashboard/
-│   ├── explore/
-│   ├── profile/
-│   └── layout.tsx
-├── components/
-│   ├── ui/
-│   └── header.tsx
-├── lib/
-├── hooks/
-├── public/
-└── styles/
+├── app/                    # Next.js app directory
+│   ├── layout.tsx         # Root layout
+│   ├── page.tsx           # Landing page
+│   └── globals.css        # Global styles
+├── components/            # Reusable components
+├── lib/                   # Utility functions
+├── public/               # Static assets
+└── types/                # TypeScript types
 ```
 
 
 ## Contributing
-We welcome contributions!  Follow these guidelines:
-1. Fork the repository.
-2. Create a feature branch.
-3. Commit changes.
-4. Push to the branch.
-5. Open a Pull Request.
 
-### Contribution Guidelines
-- Follow existing code style.
-- Write tests.
-- Update documentation.
-- Ensure CI checks pass.
-
-
-## Performance Monitoring
-- Initial load time: < 2s
-- Lighthouse score target: 90+
-
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
-MIT License.
 
-
-## Acknowledgments
-- Next.js
-- Tailwind CSS
-- shadcn/ui
-- Framer Motion
-- Lucide Icons
-- NextAuth.js
-- React Hook Form
-
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact
-Your Name - Nilambar Elangbam
-Project Link: https://github.com/neslang-05/SkillSwap-v2lgit
+
+LinkedIn -
+ https://www.linkedin.com/in/joymangol-chingangbam-70b813288/ 
+https://www.linkedin.com/in/nilambar-elangbam-524617247/
+https://www.linkedin.com/in/jashwant-nongthombam-17a817340/
+
+Project Link: [https://github.com/neslang-05/SkillSwap-v2](https://github.com/yourusername/skillswap)
+
+## Acknowledgments
+
+- [Next.js](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [Framer Motion](https://www.framer.com/motion/)
+
+
