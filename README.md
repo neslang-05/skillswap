@@ -22,8 +22,8 @@ SkillSwap is a platform that enables students to exchange skills and knowledge w
 - **Components:** shadcn/ui
 - **Animations:** Framer Motion
 - **State Management:** React Hooks
-- **Authentication:** [Your Auth Provider]
-- **Database:** [Your Database]
+- **Authentication:** [NextAuth]
+- **Database:** [MongoDB]
 
 ## Getting Started
 
@@ -36,7 +36,7 @@ SkillSwap is a platform that enables students to exchange skills and knowledge w
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/skillswap.git
+git clone https://github.com/neslang-05/skillswap-v2.git
 ```
 
 2. Install dependencies:
