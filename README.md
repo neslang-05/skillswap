@@ -47,8 +47,8 @@ npm install
 
 3. Create a `.env.local` file in the root directory and add your environment variables:
 ```env
-NEXT_PUBLIC_API_URL=your_api_url
-DATABASE_URL=your_database_url
+MONGODB_URI=your_database_url
+JWT_SECRET=your_jwt_secret
 ```
 
 4. Run the development server:
@@ -62,14 +62,14 @@ npm run dev
 
 ```
 skillswap/
-├── app/                    # Next.js app directory
+├── app/                   # Next.js app directory
 │   ├── layout.tsx         # Root layout
 │   ├── page.tsx           # Landing page
 │   └── globals.css        # Global styles
 ├── components/            # Reusable components
 ├── lib/                   # Utility functions
-├── public/               # Static assets
-└── types/                # TypeScript types
+├── public/                # Static assets
+└── types/                 # TypeScript types
 ```
 
 
@@ -92,7 +92,7 @@ LinkedIn -
 https://www.linkedin.com/in/nilambar-elangbam-524617247/
 https://www.linkedin.com/in/jashwant-nongthombam-17a817340/
 
-Project Link: [https://github.com/neslang-05/SkillSwap-v2](https://github.com/yourusername/skillswap)
+Project Link: [https://github.com/neslang-05/SkillSwap-v2](GitHub SkillSwap-v2)
 
 ## Acknowledgments
 
