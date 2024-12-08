@@ -22,7 +22,7 @@ SkillSwap is a platform that enables students to exchange skills and knowledge w
 - **Components:** shadcn/ui
 - **Animations:** Framer Motion
 - **State Management:** React Hooks
-- **Authentication:** [NextAuth]
+- **Authentication:** [JWT]
 - **Database:** [MongoDB]
 
 ## Getting Started
