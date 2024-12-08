@@ -47,11 +47,11 @@
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   },
-  "description": "Skillswap frontend ",
+  "description": "Skillswap full stack application",
   "main": "postcss.config.js",
   "directories": {
     "lib": "lib"
   },
-  "author": "Nilambar Elangbam",
+  "author": "Nilambar Elangbam, Joymangol Chingangbam, Nongthongbam Jashwant Singh",
   "license": "MIT"
 }
