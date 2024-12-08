@@ -1,156 +1,117 @@
 "use client";
+import { useAuth } from '@/contexts/auth-context'
+import { useTheme } from 'next-themes'
 import Link from 'next/link'
-import { Button } from "@/components/ui/button"
-import { useState, useEffect } from 'react'
-import { useTheme } from "next-themes"
-import { Moon, Sun, User, Menu } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { Button } from './ui/button'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useRouter } from 'next/navigation'
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { User, LogOut, Sun, Moon, Compass, Edit, LayoutDashboard } from 'lucide-react'
 
 export function Header() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const { setTheme, theme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const { isAuthenticated, setIsAuthenticated, setUserId } = useAuth()
   const router = useRouter()
+  const { theme, setTheme } = useTheme()
 
-  useEffect(() => setMounted(true), [])
+  const handleSignOut = async () => {
+    try {
+      const res = await fetch('/api/auth/signout', {
+        method: 'POST',
+      })
 
-  // This would be replaced with actual authentication logic
-  useEffect(() => {
-    // Simulating an authentication check
-    setIsAuthenticated(localStorage.getItem('isAuthenticated') === 'true')
-  }, [])
+      if (!res.ok) {
+        throw new Error('Failed to sign out')
+      }
+
+      setIsAuthenticated(false)
+      setUserId(null)
+      router.push('/')
+    } catch (error) {
+      console.error('Sign out error:', error)
+    }
+  }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-primary">
-          SkillSwap
-        </Link>
-        <nav className="hidden md:flex items-center space-x-4">
-          <Link href="/search" className="text-muted-foreground hover:text-primary">
-            <b>Search Skills</b>
+    <header className="border-b">
+      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="flex items-center space-x-6">
+          <Link href="/" className="font-bold text-xl">
+            SkillSwap
           </Link>
-          <Link href="/explore" className="text-muted-foreground hover:text-primary">
-            <b>Explore</b>
-          </Link>
-          {!isAuthenticated ? (
-            <>
+        </div>
+        
+        <nav className="flex items-center space-x-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          >
+            {theme === 'dark' ? (
+              <Sun className="h-5 w-5" />
+            ) : (
+              <Moon className="h-5 w-5" />
+            )}
+          </Button>
+
+          {isAuthenticated ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src="/placeholder.svg" alt="Profile" />
+                    <AvatarFallback>
+                      <User className="h-4 w-4" />
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuItem asChild>
+                  <Link href="/profile">
+                    <User className="mr-2 h-4 w-4" />
+                    View Profile
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/profile/edit">
+                    <Edit className="mr-2 h-4 w-4" />
+                    Edit Profile
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/dashboard">
+                    <LayoutDashboard className="mr-2 h-4 w-4" />
+                    Dashboard
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/explore">
+                    <Compass className="mr-2 h-4 w-4" />
+                    Explore Skills
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleSignOut} className="text-red-600">
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Sign out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <div className="flex items-center space-x-4">
               <Link href="/signin">
-                <Button variant="outline">Sign In</Button>
+                <Button variant="ghost">Sign In</Button>
               </Link>
               <Link href="/signup">
                 <Button>Sign Up</Button>
               </Link>
-            </>
-          ) : (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <User className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
-                  <span className="sr-only">Toggle user menu</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onSelect={() => router.push('/profile/1')}>
-                  Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem onSelect={() => router.push('/dashboard')}>
-                  Dashboard
-                </DropdownMenuItem>
-                <DropdownMenuItem onSelect={() => {
-                  localStorage.setItem('isAuthenticated', 'false')
-                  setIsAuthenticated(false)
-                  router.push('/')
-                }}>
-                  Log out
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            </div>
           )}
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label="Toggle theme"
-            className="bg-background text-foreground"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          >
-            {mounted && (theme === "dark" ? (
-              <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
-            ) : (
-              <Moon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
-            ))}
-            <span className="sr-only">Toggle theme</span>
-          </Button>
         </nav>
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="md:hidden">
-              <Menu className="h-[1.2rem] w-[1.2rem]" />
-              <span className="sr-only">Open menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left">
-            <nav className="flex flex-col space-y-4">
-              <Link href="/search" className="text-muted-foreground hover:text-primary">
-                Search Skills
-              </Link>
-              <Link href="/explore" className="text-muted-foreground hover:text-primary">
-                Explore
-              </Link>
-              {!isAuthenticated ? (
-                <>
-                  <Link href="/signin">
-                    <Button variant="outline" className="w-full">Sign In</Button>
-                  </Link>
-                  <Link href="/signup">
-                    <Button className="w-full">Sign Up</Button>
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <Link href="/profile/1">
-                    <Button variant="ghost" className="w-full justify-start">Profile</Button>
-                  </Link>
-                  <Link href="/dashboard">
-                    <Button variant="ghost" className="w-full justify-start">Dashboard</Button>
-                  </Link>
-                  <Button 
-                    variant="ghost" 
-                    className="w-full justify-start"
-                    onClick={() => {
-                      localStorage.setItem('isAuthenticated', 'false')
-                      setIsAuthenticated(false)
-                      router.push('/')
-                    }}
-                  >
-                    Log out
-                  </Button>
-                </>
-              )}
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label="Toggle theme"
-                className="bg-background text-foreground"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              >
-                {mounted && (theme === "dark" ? (
-                  <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
-                ) : (
-                  <Moon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
-                ))}
-                <span className="sr-only">Toggle theme</span>
-              </Button>
-            </nav>
-          </SheetContent>
-        </Sheet>
       </div>
     </header>
   )

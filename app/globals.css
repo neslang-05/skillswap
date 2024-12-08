@@ -63,6 +63,15 @@
   }
 }
 
+.hero-gradient {
+  background: radial-gradient(
+    circle at top,
+    #f6f6f6,
+    #2fc0a7,
+    #5d08cc,
+    #ffffff
+  );
+}
 
 
 
