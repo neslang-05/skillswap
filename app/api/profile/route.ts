@@ -8,7 +8,7 @@ import { AppError, handleError } from '@/lib/errors';
 // Get profile
 export async function GET() {
   try {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const token = cookieStore.get('token');
     
     if (!token) {
@@ -35,7 +35,7 @@ export async function GET() {
 // Update profile
 export async function PUT(request: Request) {
   try {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const token = cookieStore.get('token');
     
     if (!token) {

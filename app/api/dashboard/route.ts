@@ -25,9 +25,9 @@ interface IUser {
 
 export async function GET() {
   try {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const token = cookieStore.get('token');
-   
+    
     if (!token) {
       throw new AppError('Unauthorized', 401);
     }

@@ -66,11 +66,27 @@
 .hero-gradient {
   background: radial-gradient(
     circle at top,
-    #f6f6f6,
-    #2fc0a7,
-    #5d08cc,
-    #ffffff
+    #84b6fc, /* Purple */
+    #054ab9, 
+    #010734,/* Blue */
+    #000000  /* Deep Navy */
   );
+  filter: brightness(0.9) contrast(1.1); /* Dim and enhance contrast */
+  height: 100vh;
+  width: 100%;
+}
+
+/* Add grainy texture */
+.hero-gradient::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxmaWx0ZXIgaWQ9ImdyYWluIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWwiIGJhc2VGcmVxdWVuY3k9IjMuMCIgbnVtT2N0YXZlcz0iMyIgcmVzdWx0PSJ0dXJidWxlbmNlIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2dyYWluKSIgZmlsbD0icmdiYSgwLDAsMCwwLjA1KSIvPjwvc3ZnPg==');
+  opacity: 0.2; /* Control intensity of the grain */
+  pointer-events: none;
 }
 
 
