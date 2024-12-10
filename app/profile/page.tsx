@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { Header } from '@/components/header'
 import { Button } from "@/components/ui/button"
@@ -39,13 +39,13 @@ export default function Profile() {
   const [isLoading, setIsLoading] = useState(true)
   const { toast } = useToast()
 
-  const fetchProfile = async () => {
+  const fetchProfile = useCallback(async () => {
     try {
       const res = await fetch('/api/profile')
       if (!res.ok) throw new Error('Failed to fetch profile')
       const data = await res.json()
       setProfile(data)
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: "Error",
         description: "Failed to load profile",
@@ -54,7 +54,7 @@ export default function Profile() {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [toast])
 
   useEffect(() => {
     fetchProfile()

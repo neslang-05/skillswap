@@ -35,7 +35,7 @@ export default function Dashboard() {
       if (!res.ok) throw new Error('Failed to fetch dashboard data')
       const data = await res.json()
       setProfile(data)
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: "Error",
         description: "Failed to load dashboard data",
@@ -44,7 +44,7 @@ export default function Dashboard() {
     } finally {
       setIsLoading(false)
     }
-  }, []);
+  }, [toast]);
 
   useEffect(() => {
     fetchDashboardData();

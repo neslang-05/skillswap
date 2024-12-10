@@ -108,7 +108,7 @@ export default function SkillExchangePage() {
                 </Avatar>
                 <div className="bg-muted p-3 rounded-lg">
                   <p className="font-semibold">{exchangeData.teacher.name}</p>
-                  <p>Hello! I'm glad you're excited. How about we schedule our first session for next week?</p>
+                  <p>Hello! I&apos;m glad you&apos;re excited. How about we schedule our first session for next week?</p>
                 </div>
               </div>
             </div>

@@ -13,7 +13,7 @@ export async function GET() {
 
     const decoded = verifyToken(token.value) as { userId: string }
     return NextResponse.json({ authenticated: true, userId: decoded.userId })
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json({ authenticated: false }, { status: 401 })
   }
 } 

@@ -43,7 +43,7 @@ export async function POST(req: Request) {
 
     return response;
 
-  } catch (error) {
-    return handleError(error);
+  } catch (_error) {
+    return handleError(_error);
   }
 } 

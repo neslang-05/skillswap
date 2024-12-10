@@ -58,7 +58,7 @@ export async function GET() {
       skills: user.skills || [],
       exchanges: formattedExchanges
     });
-  } catch (error) {
-    return handleError(error);
+  } catch (_error) {
+    return handleError(_error);
   }
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -63,13 +63,13 @@ export default function EditProfile() {
   const [errors, setErrors] = useState<ProfileErrors>({})
   const [password, setPassword] = useState({ current: '', new: '', confirm: '' })
 
-  const fetchProfile = async () => {
+  const fetchProfile = useCallback(async () => {
     try {
       const res = await fetch('/api/profile')
       if (!res.ok) throw new Error('Failed to fetch profile')
       const data = await res.json()
       setProfile(data)
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: "Error",
         description: "Failed to load profile",
@@ -78,7 +78,7 @@ export default function EditProfile() {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [toast])
 
   useEffect(() => {
     fetchProfile()
@@ -120,7 +120,7 @@ export default function EditProfile() {
         description: "Profile updated successfully",
       })
       router.push('/profile')
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: "Error",
         description: "Failed to update profile",
@@ -128,39 +128,6 @@ export default function EditProfile() {
       })
     } finally {
       setIsLoading(false)
-    }
-  }
-
-  const handlePasswordChange = async () => {
-    if (password.new !== password.confirm) {
-      toast({
-        title: "Error",
-        description: "New passwords don't match",
-        variant: "destructive",
-      })
-      return
-    }
-
-    try {
-      const res = await fetch('/api/profile/password', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(password)
-      })
-
-      if (!res.ok) throw new Error('Failed to update password')
-
-      toast({
-        title: "Success",
-        description: "Password updated successfully",
-      })
-      setPassword({ current: '', new: '', confirm: '' })
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to update password",
-        variant: "destructive",
-      })
     }
   }
 
