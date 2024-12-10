@@ -61,7 +61,6 @@ export default function EditProfile() {
   const router = useRouter()
   const { toast } = useToast()
   const [errors, setErrors] = useState<ProfileErrors>({})
-  const [password, setPassword] = useState({ current: '', new: '', confirm: '' })
 
   const fetchProfile = useCallback(async () => {
     try {
@@ -69,7 +68,8 @@ export default function EditProfile() {
       if (!res.ok) throw new Error('Failed to fetch profile')
       const data = await res.json()
       setProfile(data)
-    } catch (_error) {
+    } catch (err) {
+      console.error(err)
       toast({
         title: "Error",
         description: "Failed to load profile",
@@ -120,7 +120,8 @@ export default function EditProfile() {
         description: "Profile updated successfully",
       })
       router.push('/profile')
-    } catch (_error) {
+    } catch (err) {
+      console.error(err)
       toast({
         title: "Error",
         description: "Failed to update profile",

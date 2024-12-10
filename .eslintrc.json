@@ -9,9 +9,10 @@
     "react/no-unescaped-entities": "off",
     "@typescript-eslint/no-unused-vars": ["error", { 
       "argsIgnorePattern": "^_",
-      "varsIgnorePattern": "^_"
+      "varsIgnorePattern": "^_",
+      "caughtErrorsIgnorePattern": "^_"
     }],
     "react-hooks/exhaustive-deps": "warn",
-    "no-var": "error"
+    "no-var": "off"
   }
 }

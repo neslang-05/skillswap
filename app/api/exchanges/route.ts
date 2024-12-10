@@ -8,7 +8,7 @@ import { AppError, handleError } from '@/lib/errors';
 // Create new exchange
 export async function POST(req: Request) {
   try {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const token = cookieStore.get('token');
     
     if (!token) {
@@ -59,7 +59,7 @@ export async function POST(req: Request) {
 // Update exchange status
 export async function PUT(req: Request) {
   try {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const token = cookieStore.get('token');
     
     if (!token) {
