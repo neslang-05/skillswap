@@ -1,0 +1,41 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  email         String    @unique
+  password      String
+  avatar        String?
+  bio          String?
+  university    String
+  year         String
+  website      String?
+  twitter      String?
+  linkedin     String?
+  github       String?
+  location     String?
+  skillsOffered String[]
+  skillsWanted  String[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Exchange {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String    @db.ObjectId
+  partnerId     String    @db.ObjectId
+  skillOffered  String
+  skillRequested String
+  status        String    @default("pending") // pending, accepted, rejected, completed
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
