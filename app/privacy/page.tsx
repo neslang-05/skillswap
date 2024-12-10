@@ -37,6 +37,8 @@ export default function PrivacyPolicy() {
 
             <h2>9. Contact Us</h2>
             <p>If you have any questions about this privacy policy, please contact us at [Your Contact Information].</p>
+
+            <p>It&apos;s important to read the privacy policy.</p>
           </CardContent>
         </Card>
       </main>

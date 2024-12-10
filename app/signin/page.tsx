@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { Header } from '@/components/header'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -14,7 +13,6 @@ export default function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
   const { toast } = useToast()
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -111,7 +109,7 @@ export default function SignIn() {
               Forgot password?
             </Link>
             <Link href="/signup" className="text-sm text-muted-foreground hover:text-primary">
-              Don't have an account? Sign up
+              Don&apos;t have an account? Sign up
             </Link>
           </CardFooter>
         </Card>

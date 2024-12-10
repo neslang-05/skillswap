@@ -39,10 +39,6 @@ export default function Profile() {
   const [isLoading, setIsLoading] = useState(true)
   const { toast } = useToast()
 
-  useEffect(() => {
-    fetchProfile()
-  }, [])
-
   const fetchProfile = async () => {
     try {
       const res = await fetch('/api/profile')
@@ -59,6 +55,10 @@ export default function Profile() {
       setIsLoading(false)
     }
   }
+
+  useEffect(() => {
+    fetchProfile()
+  }, [fetchProfile])
 
   if (isLoading) return <div>Loading...</div>
   if (!profile) return <div>Failed to load profile</div>

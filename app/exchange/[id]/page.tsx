@@ -98,7 +98,7 @@ export default function SkillExchangePage() {
                 </Avatar>
                 <div className="bg-muted p-3 rounded-lg">
                   <p className="font-semibold">{exchangeData.student.name}</p>
-                  <p>Hi! I'm excited to learn JavaScript. When can we start?</p>
+                  <p>It&apos;s a great day to learn!</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">

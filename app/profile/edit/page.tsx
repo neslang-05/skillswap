@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
@@ -64,10 +63,6 @@ export default function EditProfile() {
   const [errors, setErrors] = useState<ProfileErrors>({})
   const [password, setPassword] = useState({ current: '', new: '', confirm: '' })
 
-  useEffect(() => {
-    fetchProfile()
-  }, [])
-
   const fetchProfile = async () => {
     try {
       const res = await fetch('/api/profile')
@@ -84,6 +79,10 @@ export default function EditProfile() {
       setIsLoading(false)
     }
   }
+
+  useEffect(() => {
+    fetchProfile()
+  }, [fetchProfile])
 
   const validateForm = () => {
     const newErrors: ProfileErrors = {}

@@ -2,7 +2,7 @@ import * as jose from 'jose';
 import jwt from 'jsonwebtoken';
 
 // For server-side operations (API routes)
-export function signToken(payload: any) {
+export function signToken(payload: Record<string, unknown>) {
   return jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '7d' });
 }
 

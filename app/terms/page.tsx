@@ -46,6 +46,9 @@ export default function TermsAndConditions() {
 
             <h2>12. Contact</h2>
             <p>For any questions about these Terms and Conditions, please contact us at [Your Contact Information].</p>
+
+            <h2>13. Example of Escaping</h2>
+            <p>Say &quot;Hello&quot; to everyone!</p>
           </CardContent>
         </Card>
       </main>
