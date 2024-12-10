@@ -295,33 +295,74 @@ export default function EditProfile() {
                       <p>Skills you want to learn (separate with commas)</p>
                     </TooltipContent>
                   </Tooltip>
-                </div>
 
-                <div className="mt-8 pt-8 border-t">
-                  <h3 className="text-lg font-semibold mb-4">Change Password</h3>
-                  <div className="space-y-4">
-                    <Input
-                      type="password"
-                      placeholder="Current Password"
-                      value={password.current}
-                      onChange={(e) => setPassword({ ...password, current: e.target.value })}
-                    />
-                    <Input
-                      type="password"
-                      placeholder="New Password"
-                      value={password.new}
-                      onChange={(e) => setPassword({ ...password, new: e.target.value })}
-                    />
-                    <Input
-                      type="password"
-                      placeholder="Confirm New Password"
-                      value={password.confirm}
-                      onChange={(e) => setPassword({ ...password, confirm: e.target.value })}
-                    />
-                    <Button type="button" onClick={handlePasswordChange}>
-                      Update Password
-                    </Button>
-                  </div>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div>
+                        <Label htmlFor="website">Website</Label>
+                        <Input
+                          id="website"
+                          value={profile.website}
+                          onChange={(e) => setProfile({ ...profile, website: e.target.value })}
+                          placeholder="https://yourwebsite.com"
+                        />
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Your personal or professional website</p>
+                    </TooltipContent>
+                  </Tooltip>
+
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div>
+                        <Label htmlFor="twitter">Twitter</Label>
+                        <Input
+                          id="twitter"
+                          value={profile.twitter}
+                          onChange={(e) => setProfile({ ...profile, twitter: e.target.value })}
+                          placeholder="@yourtwitterhandle"
+                        />
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Your Twitter handle</p>
+                    </TooltipContent>
+                  </Tooltip>
+
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div>
+                        <Label htmlFor="linkedin">LinkedIn</Label>
+                        <Input
+                          id="linkedin"
+                          value={profile.linkedin}
+                          onChange={(e) => setProfile({ ...profile, linkedin: e.target.value })}
+                          placeholder="https://linkedin.com/in/yourprofile"
+                        />
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Your LinkedIn profile URL</p>
+                    </TooltipContent>
+                  </Tooltip>
+
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div>
+                        <Label htmlFor="github">GitHub</Label>
+                        <Input
+                          id="github"
+                          value={profile.github}
+                          onChange={(e) => setProfile({ ...profile, github: e.target.value })}
+                          placeholder="https://github.com/yourusername"
+                        />
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Your GitHub profile URL</p>
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
 
                 <Button type="submit" className="w-full mt-6" disabled={isLoading}>
