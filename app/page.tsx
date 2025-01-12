@@ -357,7 +357,7 @@ export default function LandingPage() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-muted-foreground">
-              &copy; 2024 SkillSwap. All rights reserved.
+              &copy; 2025 SkillSwap LLC. All rights reserved.
             </div>
             <div className="flex items-center space-x-4">
               <Link href="/terms" className="text-sm text-muted-foreground hover:text-primary">
@@ -367,7 +367,7 @@ export default function LandingPage() {
                 Privacy Policy
               </Link>
               <a 
-                href="https://github.com/neslang-05/SkillSwapTestV1.git" 
+                href="https://github.com/neslang-05/skillswap.git" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-sm text-muted-foreground hover:text-primary"
