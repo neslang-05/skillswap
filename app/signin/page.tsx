@@ -116,7 +116,7 @@ export default function SignIn() {
       </main>
       <footer className="bg-background border-t py-6">
         <div className="container mx-auto px-4 text-center text-muted-foreground">
-          &copy; 2024 SkillSwap. All rights reserved.
+          &copy; 2025 SkillSwap. All rights reserved.
         </div>
       </footer>
     </div>
